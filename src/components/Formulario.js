@@ -64,8 +64,7 @@ export default function Formulario() {
                 onBlur={handleBlur}
               />
               {touched.nombre && errors.nombre && (
-                <div className="error">{errors.nombre}</div>
-                
+                <div className="error">{errors.nombre}</div>                
               )}
             </div>
 
