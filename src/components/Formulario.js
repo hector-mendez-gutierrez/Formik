@@ -65,6 +65,7 @@ export default function Formulario() {
               />
               {touched.nombre && errors.nombre && (
                 <div className="error">{errors.nombre}</div>
+                
               )}
             </div>
 
