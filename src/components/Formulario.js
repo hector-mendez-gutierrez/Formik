@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Formik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 export default function Formulario() {
   //Cambiar el estado del mensaje del formulario!
@@ -38,57 +38,47 @@ export default function Formulario() {
         onSubmit={(valores, { resetForm }) => {
           // Pasas los valores q necesites!
           resetForm();
-         // console.log("Formulario Enviado!");
+          // console.log("Formulario Enviado!");
           cambiarFormularioEnviado(true);
-          setTimeout(() => cambiarFormularioEnviado(false), 5000);
+          setTimeout(() => cambiarFormularioEnviado(false), 3000);
         }}
       >
-        {({
-          values,
-          errors,
-          touched,
-          handleSubmit,
-          handleChange,
-          handleBlur,
-        }) => (
-          <form className="formulario" onSubmit={handleSubmit}>
+        {({ values, errors }) => (
+          <Form className="formulario">
             <div>
               <label htmlFor="nombre">Nombre</label>
-              <input
+              <Field
                 type="text"
                 name="nombre"
                 placeholder="Juanito Alcachofa"
                 id="nombre"
-                value={values.nombre}
-                onChange={handleChange}
-                onBlur={handleBlur}
               />
-              {touched.nombre && errors.nombre && (
-                <div className="error">{errors.nombre}</div>                
-              )}
+              <ErrorMessage
+                name="nombre"
+                component={() => <div className="error">{errors.nombre}</div>}
+              />
             </div>
 
             <div>
               <label htmlFor="correo">Correo</label>
-              <input
-                type="text"
+              <Field
+                type="email"
                 name="correo"
                 placeholder="correo@correo.cl"
                 id="correo"
-                value={values.correo}
-                onChange={handleChange}
-                onBlur={handleBlur}
               />
-              {touched.correo && errors.correo && (
-                <div className="error">{errors.correo}</div>
-              )}
+
+              <ErrorMessage
+                name="correo"
+                component={() => <div className="error">{errors.correo}</div>}
+              />
             </div>
 
             <button type="submit">Enviar</button>
             {enviarFomulario && (
               <p className="exito">Formulario enviado con exito!</p>
             )}
-          </form>
+          </Form>
         )}
       </Formik>
     </div>
